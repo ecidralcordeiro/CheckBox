@@ -1,14 +1,19 @@
+import React from 'react'
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import Checkbox from './Checkbox';
+import Home from './Home';
 
-import HeroSection from './components/Home/HeroSection';
-import Items from './components/Items';
-import "./App.css" 
-
-export default function App() {
+function App() {
   return (
-    <HeroSection></HeroSection>
-
-  );
+    <Router>
+        
+            <Routes>
+                <Route exact path='/' element={<Home/>}/>
+                <Route exact path='/checkbox' element={<Checkbox/>}/>
+            </Routes>
+        
+    </Router>
+  )
 }
 
-
-
+export default App

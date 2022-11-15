@@ -1,9 +1,11 @@
 import { Button, Typography } from '@mui/material'
-import { borderRadius, Box, Container, textAlign } from '@mui/system'
+import {  Box, Container,  } from '@mui/system'
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import React from 'react'
 
 function HeroSection() {
+    const modoCelularPequenito = useMediaQuery('(max-width:768px)');
   return (
     
     <Box sx={{
@@ -16,12 +18,12 @@ function HeroSection() {
         
         <Container sx= {{
         paddingTop: "4em",
-        
+        textAlign: modoCelularPequenito ? "center": "start",
         
     }}>
         <Typography sx={{
             letterSpacing: "3px",
-            fontSize: "4em",
+            fontSize: modoCelularPequenito ? "2.5em": "4em",
             textTransform: "uppercase",
             fontWeight: "600",
             color: "#FFFFFF",
@@ -35,27 +37,30 @@ function HeroSection() {
         }}>
             <Typography sx={{
                 textTransform:"uppercase",
-                fontSize:"1.8em",
+                
+                fontSize: modoCelularPequenito ? "1em": "1.8em",
                 color:"#fff",
                 fontWeight:"900",
                 letterSpacing: "3px",
-                width: "55%",
+                width: modoCelularPequenito? "100%" : "55% ",
                 overflowWrap: "break-word" , 
                 wordWrap: "break-word",
                 wordBreak: "break-word",
-                
+                textAlign: modoCelularPequenito ? "center" : "start",
             }}>Ferramenta para demarcar Não-Conformidades</Typography>
             <Typography sx={{
                 textTransform:"uppercase",
-                fontSize:"0.7em",
+                
+                fontSize: modoCelularPequenito ? "0.5em": "0.7em",
                 paddingTop:"1em",
                 color:"#fff",
                 fontWeight:"600",
                 letterSpacing: "3px",
-                width: "40%",
+                width: modoCelularPequenito? "100%" : "35% ",
                 overflowWrap: "break-word" , 
                 wordWrap: "break-word",
                 wordBreak: "break-word",
+                textAlign: modoCelularPequenito ? "center" : "start",
                 
             }}>Feito por: Eduardo Cidral, Lucca, Tiago Yukio e Nicolas Brun</Typography>
         </Container>
@@ -63,11 +68,12 @@ function HeroSection() {
             
             
             paddingTop: "2em",
+            textAlign: modoCelularPequenito ? "center" : "start",
         }}><Button variant="outlined" sx={{
             fontWeight:"600",
             borderRadius:"900px"
         }
-        }>Comece Agora</Button>
+        }href="/checkbox">Comece Agora</Button>
         
         </Container>
         
