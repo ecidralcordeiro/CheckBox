@@ -35,6 +35,7 @@ function HeroSection() {
             
             
         }}>
+            
             <Typography sx={{
                 textTransform:"uppercase",
                 

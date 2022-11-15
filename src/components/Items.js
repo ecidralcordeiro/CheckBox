@@ -42,7 +42,7 @@ export default function ItemList() {
 	
 		<div>
 			<Container sx= {{
-        paddingTop: "2em",
+        
         textAlign: "center"
     }}>
         <Typography sx={{
