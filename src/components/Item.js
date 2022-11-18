@@ -3,22 +3,26 @@ import React from 'react';
 
 export default function Item(props) {
 	return (
-		<Container sx={{
-			paddingTop:'4px',
-		}}>
-			<Typography sx={{
-				color: "#fff",
-				textTransform: "uppercase",
-				fontWeight:"600",
-				letterSpacing: '2px',
-				textAlign: "center",
-			}}>
+		<Container
+			sx={{
+				paddingTop: '4px',
+			}}
+		>
+			<Typography
+				sx={{
+					color: '#fff',
+					textTransform: 'uppercase',
+					fontWeight: '600',
+					letterSpacing: '2px',
+					textAlign: 'center',
+				}}
+			>
 				<Checkbox
 					type="checkbox"
 					value={props.isChecked}
 					onChange={() => props.handleChangeItem(props.id)}
 					sx={{
-						color: "#fff",
+						color: '#fff',
 					}}
 				/>
 				{props.title}

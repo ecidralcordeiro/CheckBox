@@ -1,105 +1,110 @@
-import {
-    Flex,
-    Box,
-    Center,
-    FormControl,
-    Input,
-    FormLabel,
-    HStack,
-    Button,
-  } from "@chakra-ui/react";
-  
-  export default  function Cadastro(props) {
-    return (
-      <Box h="100vh">
-        <Center
-          as="header"
-          h={150}
-          bg="teal.500"
-          color="white"
-          fontWeight="bold"
-          fontSize="4xl"
-          pb="8"
-        >
-          Formulário
-        </Center>
-        <Flex
-          align="center"
-          justify="center"
-          bg="blackAlpha.200"
-          h="calc(100vh - 150px)"
-        >
-          <Center
-            w="100%"
-            maxW={840}
-            bg="white"
-            top={100}
-            position="absolute"
-            borderRadius={5}
-            p="6"
-            boxShadow="0 1px 2px #ccc"
-          >
-            <FormControl display="flex" flexDir="column" gap="4">
-              <HStack spacing="4">
-                <Box w="100%">
-                  <FormLabel htmlFor="nome">Id Checkbox</FormLabel>
-                  <p>{props.id}</p>  
-                </Box>
+import { Box, Center } from '@chakra-ui/react';
+import { Button } from '@mui/material';
+import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
-                <Box w="100%">
-                  <FormLabel htmlFor="nome">Descrição</FormLabel>
-                 <p>{props.title}</p>                </Box>
-               
-              </HStack>
-              <HStack spacing="4">
-                <Box w="100%">
-                  <FormLabel htmlFor="nasc">Observações</FormLabel>
-                  <Input id="text" type="text" />
-                </Box>
-                <Box w="100%">
-                  <FormLabel htmlFor="email">E-mail</FormLabel>
-                  <Input id="text" type="text" />
+export default function Cadastro(props) {
+	const location = useLocation();
+	const [naoConformidadeList, setNaoConformidadeList] = useState([]);
 
-                </Box>
-                
-              </HStack>
-              <HStack spacing="4">
-                <Box w="100%">
-                  <FormLabel htmlFor="nasc">Data Notificação</FormLabel>
-                  <Input id="nasc" type="date" />
-                </Box>
-                <Box w="100%">
-                  <FormLabel htmlFor="nasc">Data de Vencimento</FormLabel>
-                  <Input id="nasc" type="date" />
-                </Box>
-                
-              </HStack>
-            
-              <HStack spacing="4">
-               
-                
-              </HStack>
-             
-            
-              <HStack justify="center">
-                <Button
-                  w={240}
-                  p="6"
-                  type="submit"
-                  bg="teal.600"
-                  color="white"
-                  fontWeight="bold"
-                  fontSize="xl"
-                  mt="2"
-                  _hover={{ bg: "teal.800" }}
-                >
-                  Enviar E-mail
-                </Button>
-              </HStack>
-            </FormControl>
-          </Center>
-        </Flex>
-      </Box>
-    );
-  }
-  
+	useEffect(() => {
+		let newList = [...location.state.data].filter(
+			(obj) => obj.isChecked === false
+		);
+		setNaoConformidadeList(newList);
+	}, []);
+
+	const handleSendEmail = () => {};
+
+	return (
+		<Box h="100vh">
+			<Button
+				variant="text"
+				href="/"
+				sx={{
+					top: '2em',
+					left: '1em',
+					borderRadius: '900px',
+					fontWeight: '600',
+				}}
+			>
+				<ArrowBackIosIcon></ArrowBackIosIcon>
+				Voltar
+			</Button>
+			<Center
+				as="header"
+				h={150}
+				bg="teal.500"
+				color="white"
+				fontWeight="bold"
+				fontSize="4xl"
+				pb="8"
+			>
+				Formulário
+			</Center>
+			<section
+				style={{ display: 'flex', flexDirection: 'column', margin: '0 auto' }}
+			>
+				{naoConformidadeList.map((item, index) => (
+					<div
+						key={item.id}
+						style={{
+							minHeight: '200px',
+							width: '50vw',
+							margin: 'auto',
+							marginBottom: '40px',
+							backgroundColor: 'white',
+							borderRadius: '10px',
+							padding: '16px',
+							boxSizing: 'border-box',
+							display: 'grid',
+							gridTemplateColumns: '1fr 1fr',
+							gridTemplateRows: '1fr 1fr 1fr',
+							columnGap: '12px',
+							rowGap: '12px',
+						}}
+					>
+						<label style={{ textAlign: 'center' }}>
+							Id Checkbox <br /> {item.id}
+						</label>
+						<label style={{ textAlign: 'center' }}>
+							Descrição <br /> {item.title}
+						</label>
+						<label style={{ textAlign: 'center' }}>
+							Observações: <br /> <input type="text" />
+						</label>
+						<label style={{ textAlign: 'center' }}>
+							E-mail: <br /> <input type="text" />
+						</label>
+						<label style={{ textAlign: 'center' }}>
+							Classificação: <br />{' '}
+							<select id="classificacao" name="classificacao">
+								<option value="">Selecione uma classificação</option>
+								<option value="critico">Critico</option>
+								<option value="moderado">Moderado</option>
+								<option value="tolerável">Tolerável</option>
+							</select>
+						</label>
+						<label style={{ textAlign: 'center' }}>
+							Data de Vencimento: <br /> <input type="date" />
+						</label>
+					</div>
+				))}
+				<Button
+					onClick={() => handleSendEmail()}
+					sx={{
+						width: 'fit-content',
+						margin: 'auto',
+						borderRadius: '900px',
+						fontWeight: '600',
+						marginBottom: '20px',
+						border: '2px',
+					}}
+				>
+					Enviar e-mails
+				</Button>
+			</section>
+		</Box>
+	);
+}
